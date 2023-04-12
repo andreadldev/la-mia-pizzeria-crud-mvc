@@ -1,0 +1,13 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<a href="@Url.Action("Index", "Pizza")">Indietro</a>
+<div class="d-flex py-5">
+    <img class="rounded-circle" width="250" src="@Model.Img" alt="...">
+    <div class="px-5 py-4">
+        <h1>@Model.Name</h1>
+        <p>@Model.Description</p>
+        <span>@Model.Price €</span>
+    </div>
+</div>

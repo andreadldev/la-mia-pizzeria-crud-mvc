@@ -1,0 +1,30 @@
+﻿@{
+    Layout = "_Layout";
+    @model Pizza;
+}
+
+<a href="@Url.Action("Index", "Pizza")">Indietro</a>
+<div class="container d-flex pt-5">
+    <form asp-controller="Pizza" asp-action="Create" method="post">
+        @Html.AntiForgeryToken()
+        <div class="mb-3 d-flex justify-content-between">
+            <strong>Nome:</strong>
+            <input asp-for="Name"/>
+        </div>
+        <div class="mb-3 d-flex justify-content-between">
+            <strong>Descrizione:</strong>
+            <input asp-for="Description" />
+        </div>
+        <div class="mb-3 d-flex justify-content-between">
+            <strong>Prezzo:</strong>
+            <input asp-for="Price" />
+        </div>
+        <div class="mb-3 d-flex justify-content-between">
+            <strong>Immagine:</strong>
+            <input asp-for="Img" />
+        </div>
+        <div>
+            <input type="submit" class="btn btn-primary"/>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,30 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<div class="container p-3 bg-light" id="menu">
+    <div class="text-center pt-4 text-danger">
+        <h1>Menù pizze</h1>
+        <h2>@ViewData["Message"]</h2>
+    </div>
+    <div class="pb-4">
+        <a class="ps-3" href="@Url.Action("Create", "Pizza")">
+            Crea nuova pizza
+        </a>
+    </div>
+    <div class="row d-flex flex-wrap">
+        @for (int i = 0; i < Model.Length; i++)
+        {
+        <div class="col-12 col-md-6 d-flex align-items-center py-3 justify-content-center">
+            <img class="rounded-circle" width="150" src="@Model[i].Img" alt="...">
+            <div class="d-flex flex-column px-2">
+                    <a href="@Url.Action("Show", "Pizza", new { Id = @Model[i].Id })">
+                        <h5>@Model[i].Name</h5>
+                    </a>
+                <p>@Model[i].Description</p>
+                <span>@($"{Model[i].Price} €")</span>
+            </div>
+        </div>
+        }
+    </div>
+</div>
