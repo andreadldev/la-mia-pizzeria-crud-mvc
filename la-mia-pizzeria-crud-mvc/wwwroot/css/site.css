@@ -45,3 +45,11 @@ footer {
     background-color: #fffef3 !important;
     height: 100% !important;
 }
+
+.btn-link {
+    outline: none !important;
+    box-shadow: none !important;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+}

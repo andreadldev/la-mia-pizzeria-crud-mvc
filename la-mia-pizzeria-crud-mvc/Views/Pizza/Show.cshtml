@@ -3,13 +3,31 @@
 }
 
 <a href="@Url.Action("Index", "Pizza")">Indietro</a>
-<a href="@Url.Action("Update", "Pizza", new { Id = @Model.Id })">Modifica</a>
-<a href="@Url.Action("Delete", "Pizza", new { Id = @Model.Id })">Cancella</a>
+<a class="mx-2" href="@Url.Action("Update", "Pizza", new { Id = @Model.Id })">Modifica</a>
+<button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Modale
+</button>
+
 <div class="d-flex py-5">
     <img class="rounded-circle" width="250" src="@Model.Img" alt="...">
     <div class="px-5 py-4">
         <h1>@Model.Name</h1>
         <p>@Model.Description</p>
         <span>@Model.Price €</span>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                Sei sicuro?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Torna indietro</button>
+                <a class="btn btn-danger" href="@Url.Action("Delete", "Pizza", new { Id = @Model.Id })">Elimina</a>
+            </div>
+        </div>
     </div>
 </div>
