@@ -100,5 +100,22 @@ namespace la_mia_pizzeria_crud_mvc.Controllers
                 return RedirectToAction("Index");
             }
         }
+
+        public IActionResult Delete(long id) 
+        {
+            using (PizzaContext ctx = new PizzaContext())
+            {
+                Pizza _pizza = ctx.Pizzas.Where(pizza => pizza.Id == id).FirstOrDefault();
+
+                if (_pizza == null)
+                {
+                    return NotFound();
+                }
+
+                ctx.Pizzas.Remove(_pizza);
+                ctx.SaveChanges();
+                return RedirectToAction("Index");
+            }
+        }
     }
 }
