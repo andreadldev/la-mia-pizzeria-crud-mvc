@@ -1,0 +1,28 @@
+﻿@{
+    Layout = "_Layout";
+    @model Pizza;
+}
+
+<a class="d-block mb-3" href="@Url.Action("Show", "Pizza", new { Id = @Model.Id })">Indietro</a>
+<form asp-controller="Pizza" asp-action="Update" asp-route-id="@Model.Id" method="post">
+    @Html.AntiForgeryToken()
+    <div class="mb-3">
+        <strong>Nome:</strong>
+        <input asp-for="Name"/>
+    </div>
+    <div class="mb-3">
+        <strong>Descrizione:</strong>
+        <input asp-for="Description" />
+    </div>
+    <div class="mb-3">
+        <strong>Prezzo:</strong>
+        <input asp-for="Price" />
+    </div>
+    <div class="mb-3">
+        <strong>Immagine:</strong>
+        <input asp-for="Img" />
+    </div>
+    <div class="text-end">
+        <input type="submit" class="btn btn-primary"/>
+    </div>
+</form>

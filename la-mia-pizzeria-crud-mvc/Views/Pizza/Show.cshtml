@@ -3,6 +3,7 @@
 }
 
 <a href="@Url.Action("Index", "Pizza")">Indietro</a>
+<a href="@Url.Action("Update", "Pizza", new { Id = @Model.Id })">Modifica</a>
 <div class="d-flex py-5">
     <img class="rounded-circle" width="250" src="@Model.Img" alt="...">
     <div class="px-5 py-4">
