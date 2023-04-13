@@ -10,7 +10,7 @@ namespace la_mia_pizzeria_crud_mvc.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=UpdatedPizzaMenu;Integrated Security=True;TrustServerCertificate=true;Encrypt=false;");
+            optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=PizzaMenu;Integrated Security=True;TrustServerCertificate=true;Encrypt=false;");
         }
 
         public void Seed()
@@ -57,8 +57,29 @@ namespace la_mia_pizzeria_crud_mvc.Models
                     )
                 };
                 Pizzas.AddRange(menuList);
+            }
+
+            if (!Categories.Any())
+            {
+                var categoryList = new Category[]
+                {
+                                            new()
+                        {
+                            Name = "Classiche",
+                        },
+                        new()
+                        {
+                            Name = "Vegetariane"
+                        },
+                        new()
+                        {
+                            Name = "Di Mare"
+                        }
+                    };
+                Categories.AddRange(categoryList);
+            }
                 SaveChanges();
             }
         }
     }
-}
+

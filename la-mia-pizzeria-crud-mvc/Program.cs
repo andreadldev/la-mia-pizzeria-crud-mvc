@@ -1,3 +1,5 @@
+using la_mia_pizzeria_crud_mvc.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

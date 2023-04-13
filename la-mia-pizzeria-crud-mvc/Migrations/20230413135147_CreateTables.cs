@@ -5,7 +5,7 @@
 namespace la_mia_pizzeria_crud_mvc.Migrations
 {
     /// <inheritdoc />
-    public partial class AddCategoriesTable : Migration
+    public partial class CreateTables : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

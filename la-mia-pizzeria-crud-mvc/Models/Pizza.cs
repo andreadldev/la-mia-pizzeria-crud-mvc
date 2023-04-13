@@ -20,7 +20,6 @@ namespace la_mia_pizzeria_crud_mvc.Models
         [Required]
         [StringLength(25)]
         public string Name { get; set; }
-        [DescriptionValidation]
         [StringLength(100)]
         public string Description { get; set; }
         [Required]

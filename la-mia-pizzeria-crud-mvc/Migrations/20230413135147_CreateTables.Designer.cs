@@ -12,8 +12,8 @@ using la_mia_pizzeria_crud_mvc.Models;
 namespace la_mia_pizzeria_crud_mvc.Migrations
 {
     [DbContext(typeof(PizzaContext))]
-    [Migration("20230413134400_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20230413135147_CreateTables")]
+    partial class CreateTables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

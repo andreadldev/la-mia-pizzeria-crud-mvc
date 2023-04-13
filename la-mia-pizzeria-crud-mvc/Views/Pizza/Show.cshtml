@@ -5,7 +5,7 @@
 <a href="@Url.Action("Index", "Pizza")">Indietro</a>
 <a class="mx-2" href="@Url.Action("Update", "Pizza", new { Id = @Model.Id })">Modifica</a>
 <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Modale
+    Elimina
 </button>
 
 <div class="d-flex py-5">
@@ -13,7 +13,8 @@
     <div class="px-5 py-4">
         <h1>@Model.Name</h1>
         <p>@Model.Description</p>
-        <span>@Model.Price €</span>
+        <div>@Model.Price €</div>
+        <div>@Model.Category</div>
     </div>
 </div>
 

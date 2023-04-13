@@ -29,7 +29,7 @@ namespace la_mia_pizzeria_crud_mvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Pizza data) 
+        public IActionResult Create(PizzaFormModel data) 
         {
             if (!ModelState.IsValid)
             {
@@ -39,10 +39,10 @@ namespace la_mia_pizzeria_crud_mvc.Controllers
             using (PizzaContext ctx = new PizzaContext())
             {
                 Pizza newPizza = new Pizza();
-                newPizza.Img = data.Img;
-                newPizza.Name = data.Name;
-                newPizza.Description = data.Description;
-                newPizza.Price = data.Price;
+                newPizza.Img = data.Pizza.Img;
+                newPizza.Name = data.Pizza.Name;
+                newPizza.Description = data.Pizza.Description;
+                newPizza.Price = data.Pizza.Price;
 
                 ctx.Pizzas.Add(newPizza);
                 ctx.SaveChanges();
