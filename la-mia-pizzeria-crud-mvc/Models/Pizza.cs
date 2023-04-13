@@ -26,5 +26,8 @@ namespace la_mia_pizzeria_crud_mvc.Models
         [Required]
         [Range(1, 20)]
         public double Price { get; set; }
+
+        public long? CategoryId { get; set; }
+        public Category Category { get; set; }
     }
 }

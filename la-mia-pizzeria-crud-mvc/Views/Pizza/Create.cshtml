@@ -1,6 +1,6 @@
 ﻿@{
     Layout = "_Layout";
-    @model Pizza;
+    @model PizzaFormModel;
 }
 
 <a href="@Url.Action("Index", "Pizza")">Indietro</a>
@@ -9,19 +9,19 @@
         @Html.AntiForgeryToken()
         <div class="mb-3 d-flex justify-content-between">
             <strong>Nome:</strong>
-            <input asp-for="Name"/>
+            <input asp-for="Pizza.Name"/>
         </div>
         <div class="mb-3 d-flex justify-content-between">
             <strong>Descrizione:</strong>
-            <input asp-for="Description" />
+            <input asp-for="Pizza.Description" />
         </div>
         <div class="mb-3 d-flex justify-content-between">
             <strong>Prezzo:</strong>
-            <input asp-for="Price" />
+            <input asp-for="Pizza.Price" />
         </div>
         <div class="mb-3 d-flex justify-content-between">
             <strong>Immagine:</strong>
-            <input asp-for="Img" />
+            <input asp-for="Pizza.Img" />
         </div>
         <div>
             <input type="submit" class="btn btn-primary"/>

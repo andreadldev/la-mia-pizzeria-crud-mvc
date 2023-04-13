@@ -54,7 +54,16 @@ namespace la_mia_pizzeria_crud_mvc.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            using (var ctx = new PizzaContext())
+            {
+                List<Category> categories = ctx.Categories.ToList();
+
+                PizzaFormModel model = new PizzaFormModel();
+                model.Pizza = new Pizza();
+                model.Categories = categories;
+
+                return View("Create", model);
+            }
         }
 
         [HttpGet]

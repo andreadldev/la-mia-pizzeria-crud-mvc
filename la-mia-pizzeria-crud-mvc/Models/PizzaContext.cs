@@ -6,10 +6,11 @@ namespace la_mia_pizzeria_crud_mvc.Models
     public class PizzaContext : DbContext
     {
         public DbSet<Pizza> Pizzas { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=PizzaMenu;Integrated Security=True;TrustServerCertificate=true;Encrypt=false;");
+            optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=UpdatedPizzaMenu;Integrated Security=True;TrustServerCertificate=true;Encrypt=false;");
         }
 
         public void Seed()
