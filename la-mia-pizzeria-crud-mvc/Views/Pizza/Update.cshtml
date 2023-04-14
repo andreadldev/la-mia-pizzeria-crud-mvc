@@ -1,26 +1,26 @@
 ﻿@{
     Layout = "_Layout";
-    @model Pizza;
+    @model PizzaFormModel;
 }
 
-<a class="d-block mb-3" href="@Url.Action("Show", "Pizza", new { Id = @Model.Id })">Indietro</a>
-<form asp-controller="Pizza" asp-action="Update" asp-route-id="@Model.Id" method="post">
+<a class="d-block mb-3" href="@Url.Action("Show", "Pizza", new { Id = @Model.Pizza.Id })">Indietro</a>
+<form asp-controller="Pizza" asp-action="Update" asp-route-id="@Model.Pizza.Id" method="post">
     @Html.AntiForgeryToken()
     <div class="mb-3">
         <strong>Nome:</strong>
-        <input asp-for="Name"/>
+        <input asp-for="@Model.Pizza.Name"/>
     </div>
     <div class="mb-3">
         <strong>Descrizione:</strong>
-        <input asp-for="Description" />
+        <input asp-for="@Model.Pizza.Description" />
     </div>
     <div class="mb-3">
         <strong>Prezzo:</strong>
-        <input asp-for="Price" />
+        <input asp-for="@Model.Pizza.Price" />
     </div>
     <div class="mb-3">
         <strong>Immagine:</strong>
-        <input asp-for="Img" />
+        <input asp-for="@Model.Pizza.Img" />
     </div>
     <div class="text-end">
         <input type="submit" class="btn btn-primary"/>

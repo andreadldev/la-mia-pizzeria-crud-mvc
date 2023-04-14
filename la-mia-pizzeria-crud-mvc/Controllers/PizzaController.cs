@@ -111,7 +111,7 @@ namespace la_mia_pizzeria_crud_mvc.Controllers
         {
             using (PizzaContext ctx = new PizzaContext())
             {
-                Pizza _pizza = ctx.Pizzas.Where(pizza => pizza.Id == id).FirstOrDefault();
+                Pizza _pizza = ctx.Pizzas.Where(pizza => pizza.Id == id).Include(p => p.Ingredients).FirstOrDefault();
 
                 if (_pizza == null)
                 {
@@ -119,31 +119,76 @@ namespace la_mia_pizzeria_crud_mvc.Controllers
                 }
                 else
                 {
-                    return View("Update", _pizza);
+                    List<Category> categories = ctx.Categories.ToList();
+                    List<Ingredient> ingredients = ctx.Ingredients.ToList();
+                    List<SelectListItem> listIngredients = new List<SelectListItem>();
+
+                    foreach (Ingredient ingredient in ingredients)
+                    {
+                        listIngredients.Add(new SelectListItem()
+                        { Text = ingredient.Name, Value= ingredient.Id.ToString(), Selected = _pizza.Ingredients.Any(p => p.Id == ingredient.Id) });
+                    }
+
+                    PizzaFormModel model = new PizzaFormModel();
+                    model.Pizza = _pizza;
+                    model.Categories = categories;
+                    model.Ingredients = listIngredients;
+
+                    return View("Update", model);
                 }
             }
         }
 
         [HttpPost]
-        public IActionResult Update(long id, Pizza pizza) 
+        public IActionResult Update(long id, PizzaFormModel data) 
         {
             if (!ModelState.IsValid)
             {
-                return View("Update", pizza);
+                using PizzaContext ctx = new PizzaContext();
+                {
+                    List<Category> categories = ctx.Categories.ToList();
+                    List<Ingredient> ingredients = ctx.Ingredients.ToList();
+                    List<SelectListItem> listIngredients = new List<SelectListItem>();
+
+                    foreach (Ingredient ingredient in ingredients)
+                    {
+                        listIngredients.Add(new SelectListItem()
+                        { Text = ingredient.Name, Value = ingredient.Id.ToString() });
+                    }
+
+                    data.Pizza = ctx.Pizzas.Where(p => p.Id == id).FirstOrDefault();
+                    data.Categories = categories;
+                    data.Ingredients = listIngredients;
+
+                    return View("Update", data);
+                }
             }
 
             using (PizzaContext ctx = new PizzaContext())
             {
-                Pizza _pizza = ctx.Pizzas.Where(pizza => pizza.Id == id).FirstOrDefault();
+                Pizza _pizza = ctx.Pizzas.Where(pizza => pizza.Id == id).Include(p => p.Ingredients).FirstOrDefault();
 
                 if (_pizza == null)
                 {
                     return NotFound();
                 }
-                _pizza.Name = pizza.Name;
-                _pizza.Description = pizza.Description;
-                _pizza.Price = pizza.Price;
-                _pizza.Img = pizza.Img;
+                _pizza.Name = data.Pizza.Name;
+                _pizza.Description = data.Pizza.Description;
+                _pizza.Price = data.Pizza.Price;
+                _pizza.Img = data.Pizza.Img;
+                _pizza.CategoryId = data.Pizza.CategoryId;
+
+                _pizza.Ingredients.Clear();
+
+                if (data.SelectedIngredients != null)
+                {
+                    foreach (string selectedIngredientId in data.SelectedIngredients)
+                    {
+                        int selectedIntIngredientId = int.Parse(selectedIngredientId);
+                        Ingredient ingredient = ctx.Ingredients.Where(p => p.Id == selectedIntIngredientId).FirstOrDefault();
+                        _pizza.Ingredients.Add(ingredient);
+                    }
+                }
 
                 ctx.SaveChanges();
                 return RedirectToAction("Index");
