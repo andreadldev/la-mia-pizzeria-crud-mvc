@@ -28,5 +28,7 @@ namespace la_mia_pizzeria_crud_mvc.Models
 
         public long CategoryId { get; set; }
         public Category? Category { get; set; }
+
+        public Ingredient? Ingredient { get; set; }
     }
 }

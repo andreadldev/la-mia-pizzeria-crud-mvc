@@ -7,6 +7,7 @@ namespace la_mia_pizzeria_crud_mvc.Models
     {
         public DbSet<Pizza> Pizzas { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Ingredient> Ingredients { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -98,7 +99,43 @@ namespace la_mia_pizzeria_crud_mvc.Models
                     };
                 Categories.AddRange(categoryList);
             }
-                SaveChanges();
+
+            if (!Ingredients.Any())
+            {
+                var ingredientList = new Ingredient[]
+                {
+                        new()
+                        {
+                            Name = "Pomodoro"
+                        },
+                        new()
+                        {
+                            Name = "Mozzarella"
+                        },
+                        new()
+                        {
+                            Name = "Prosciutto"
+                        },
+                        new()
+                        {
+                            Name = "Salame piccante"
+                        },
+                        new()
+                        {
+                            Name = "Cipolla"
+                        },
+                        new()
+                        {
+                            Name = "Peperoni"
+                        },
+                        new()
+                        {
+                            Name = "Olive"
+                        }
+                    };
+                Ingredients.AddRange(ingredientList);
+            }
+            SaveChanges();
             }
         }
     }
