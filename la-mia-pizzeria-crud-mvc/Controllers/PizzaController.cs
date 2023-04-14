@@ -38,6 +38,18 @@ namespace la_mia_pizzeria_crud_mvc.Controllers
                 using (PizzaContext ctx = new PizzaContext())
                 {
                     data.Categories = ctx.Categories.ToList();
+                    List<Ingredient> ingredients = ctx.Ingredients.ToList();
+                    List<SelectListItem> listIngredients = new List<SelectListItem>();
+
+                    foreach (Ingredient ingredient in ingredients)
+                    {
+                        listIngredients.Add(new SelectListItem()
+                        {
+                            Text = ingredient.Name,
+                            Value = ingredient.Id.ToString(),
+                        });
+                    }
+                    data.Ingredients = listIngredients;
                 }
                 return View("Create", data);
             }
@@ -50,6 +62,8 @@ namespace la_mia_pizzeria_crud_mvc.Controllers
                 newPizza.Description = data.Pizza.Description;
                 newPizza.Price = data.Pizza.Price;
                 newPizza.CategoryId = data.Pizza.CategoryId;
+                newPizza.Ingredients = new List<Ingredient>();
+
                 if (data.SelectedIngredients != null)
                 {
                     foreach (string selectedIngredientId in data.SelectedIngredients)
