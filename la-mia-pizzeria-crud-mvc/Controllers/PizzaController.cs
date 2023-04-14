@@ -1,5 +1,6 @@
 ﻿using la_mia_pizzeria_crud_mvc.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
@@ -23,7 +24,7 @@ namespace la_mia_pizzeria_crud_mvc.Controllers
         public IActionResult Show(long id)
         {
             using var ctx = new PizzaContext();
-            var menuItem = ctx.Pizzas.Include(p => p.Category).First(p => p.Id == id);
+            var menuItem = ctx.Pizzas.Include(p => p.Category).Include(p => p.Ingredients).First(p => p.Id == id);
 
             return View(menuItem);
         }
@@ -49,6 +50,15 @@ namespace la_mia_pizzeria_crud_mvc.Controllers
                 newPizza.Description = data.Pizza.Description;
                 newPizza.Price = data.Pizza.Price;
                 newPizza.CategoryId = data.Pizza.CategoryId;
+                if (data.SelectedIngredients != null)
+                {
+                    foreach (string selectedIngredientId in data.SelectedIngredients)
+                    {
+                        int selectedIntIngredientId = int.Parse(selectedIngredientId);
+                        Ingredient ingredient = ctx.Ingredients.Where(p => p.Id == selectedIntIngredientId).FirstOrDefault();
+                        newPizza.Ingredients.Add(ingredient);
+                    }
+                }
 
                 ctx.Pizzas.Add(newPizza);
                 ctx.SaveChanges();
@@ -63,10 +73,20 @@ namespace la_mia_pizzeria_crud_mvc.Controllers
             using (var ctx = new PizzaContext())
             {
                 List<Category> categories = ctx.Categories.ToList();
+                List<Ingredient> ingredients = ctx.Ingredients.ToList();
 
                 PizzaFormModel model = new PizzaFormModel();
                 model.Pizza = new Pizza();
                 model.Categories = categories;
+                List<SelectListItem> listIngredients = new List<SelectListItem>();
+                foreach (Ingredient ingredient in ingredients)
+                {
+                    listIngredients.Add(new SelectListItem()
+                    {
+                       Text = ingredient.Name, Value = ingredient.Id.ToString(),
+                    });
+                }
+                model.Ingredients = listIngredients;
 
                 return View("Create", model);
             }

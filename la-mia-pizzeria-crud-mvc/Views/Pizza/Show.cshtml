@@ -15,6 +15,11 @@
         <p>@Model.Description</p>
         <div>@Model.Price €</div>
         <div>@Model.Category.Name</div>
+        @*<div>@Model.Ingredients</div>*@
+        @foreach (var item in Model.Ingredients)
+        {
+            <div>ciao</div>
+        }
     </div>
 </div>
 

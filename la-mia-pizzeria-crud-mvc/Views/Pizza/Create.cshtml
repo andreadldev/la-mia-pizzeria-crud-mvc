@@ -48,6 +48,11 @@
             </select>
             <span asp-validation-for="Pizza.CategoryId"></span>
         </div>
+        <div class="mb-3">
+            <strong>Ingredienti:</strong>
+            <select asp-for="SelectedIngredients" size="10" multiple="multiple" class="form-control mb-2 leftList" asp-items="@Model.Ingredients">
+            </select>
+        </div>
         <div>
             <input type="submit" class="btn btn-primary"/>
         </div>
