@@ -1,6 +1,6 @@
-﻿@{
+﻿@model PizzaFormModel
+@{
     Layout = "_Layout";
-    @model PizzaFormModel;
 }
 
 <a href="@Url.Action("Index", "Pizza")">Indietro</a>
@@ -10,18 +10,22 @@
         <div class="mb-3 d-flex justify-content-between">
             <strong>Nome:</strong>
             <input asp-for="Pizza.Name"/>
+            <span asp-validation-for="Pizza.Name"></span>
         </div>
         <div class="mb-3 d-flex justify-content-between">
             <strong>Descrizione:</strong>
             <input asp-for="Pizza.Description" />
+            <span asp-validation-for="Pizza.Description"></span>
         </div>
         <div class="mb-3 d-flex justify-content-between">
             <strong>Prezzo:</strong>
             <input asp-for="Pizza.Price" />
+            <span asp-validation-for="Pizza.Price"></span>
         </div>
         <div class="mb-3 d-flex justify-content-between">
             <strong>Immagine:</strong>
             <input asp-for="Pizza.Img" />
+            <span asp-validation-for="Pizza.Img"></span>
         </div>
         <div class="mb-3">
             <strong>Categoria:</strong>
@@ -42,6 +46,7 @@
                     }
                 }
             </select>
+            <span asp-validation-for="Pizza.CategoryId"></span>
         </div>
         <div>
             <input type="submit" class="btn btn-primary"/>

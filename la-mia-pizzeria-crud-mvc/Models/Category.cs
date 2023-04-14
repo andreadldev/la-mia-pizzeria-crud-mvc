@@ -13,6 +13,6 @@ namespace la_mia_pizzeria_crud_mvc.Models
         [StringLength(25)]
         public string Name { get; set; }
 
-        public List<Pizza> Pizzas { get; set; }
+        public List<Pizza>? Pizzas { get; set; }
     }
 }

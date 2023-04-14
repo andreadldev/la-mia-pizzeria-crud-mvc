@@ -1,5 +1,6 @@
 ﻿using la_mia_pizzeria_crud_mvc.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace la_mia_pizzeria_crud_mvc.Controllers
@@ -22,7 +23,7 @@ namespace la_mia_pizzeria_crud_mvc.Controllers
         public IActionResult Show(long id)
         {
             using var ctx = new PizzaContext();
-            var menuItem = ctx.Pizzas.Find(id);
+            var menuItem = ctx.Pizzas.Include(p => p.Category).First(p => p.Id == id);
 
             return View(menuItem);
         }
@@ -33,6 +34,10 @@ namespace la_mia_pizzeria_crud_mvc.Controllers
         {
             if (!ModelState.IsValid)
             {
+                using (PizzaContext ctx = new PizzaContext())
+                {
+                    data.Categories = ctx.Categories.ToList();
+                }
                 return View("Create", data);
             }
 
@@ -43,6 +48,7 @@ namespace la_mia_pizzeria_crud_mvc.Controllers
                 newPizza.Name = data.Pizza.Name;
                 newPizza.Description = data.Pizza.Description;
                 newPizza.Price = data.Pizza.Price;
+                newPizza.CategoryId = data.Pizza.CategoryId;
 
                 ctx.Pizzas.Add(newPizza);
                 ctx.SaveChanges();

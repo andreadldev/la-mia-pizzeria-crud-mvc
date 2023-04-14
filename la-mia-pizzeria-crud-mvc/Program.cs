@@ -26,4 +26,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Pizza}/{action=Index}/{id?}");
 
+var ctx = new PizzaContext();
+ctx.Seed();
+
 app.Run();
