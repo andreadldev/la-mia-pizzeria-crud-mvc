@@ -3,10 +3,13 @@
 }
 
 <a href="@Url.Action("Index", "Pizza")">Indietro</a>
-<a class="mx-2" href="@Url.Action("Update", "Pizza", new { Id = @Model.Id })">Modifica</a>
-<button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Elimina
-</button>
+@if (User.IsInRole("ADMIN"))
+{
+    <a class="mx-2" href="@Url.Action("Update", "Pizza", new { Id = @Model.Id })">Modifica</a>
+    <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Elimina
+    </button>
+}
 
 <div class="d-flex py-5">
     <img class="rounded-circle" width="250" src="@Model.Img" alt="...">
